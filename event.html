@@ -1,0 +1,112 @@
+<?php 
+session_start();
+if(isset($_SESSION['username']))
+{?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/styles7.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<title>Calendrier</title>
+</head>
+<?php 
+
+$mois = date('m');
+$annee = date('Y');
+$jour = date('d');
+?>
+<body
+style="background-image:url(&quot;assets/img/one.jpg&quot;);background-repeat:repeat-y;background-size:cover;"
+>
+    <div class="features-boxed" >
+        <section style="width:100%;height:120vh;background-position:center;background-size:cover;background-image:url(&quot;assets/img/one.jpg&quot;);background-repeat:repeat-y;">
+
+<a href="tcha.php" >
+<img src="assets/img/Valeo-logo-C3C3247EFB-seeklogo.com.png" style="transform:translate(10%,10%);width:15%;">
+</a>
+<a href="logout.php">
+
+<i class="fa fa-user-circle" style="float:right;transform:translate(-10%,20%);font-size:55px;color:rgba(218,221,224,0.51);"></i>
+</a>
+            <div class="container">
+                <div class="row justify-content-center features" style="transform:translate(0,30%);">
+                    <div class="col-sm-6 col-md-5 col-lg-4 col-xl-6 offset-xl-0 item" style="background-color:rgba(255,255,255,0.6);border-radius:10px;height:400px;">
+                        <div class="box" style="border-radius:15px;"></div>
+<div>
+	<img id="prev" src="img/fa.png" height="40px" width="40px" style="float:left;"/>
+	<img id="next" src="img/fa1.png" height="40px" width="40px" style="float:right;"/>
+</div>
+<div id="content"></div>
+
+<script type="text/javascript">
+	
+jQuery(function($){
+
+	var mois = <?php echo $mois; ?>;
+	var annee = <?php echo $annee; ?>;
+
+	$(document).ready(function(){
+
+		$("#content").load("calendrier.php?mois="+mois+"&annee="+annee+"");
+
+	});
+
+	$("#prev").click(function(){
+
+		mois--;
+
+		if (mois < 1) {
+			annee--;
+			mois = 12;
+		}
+
+		$("#content").load("calendrier.php?mois="+mois+"&annee="+annee+"");
+
+	});
+
+	$("#next").click(function(){
+
+		mois++;
+
+		if (mois > 12) {
+			annee++;
+			mois = 1;
+		}
+
+		$("#content").load("calendrier.php?mois="+mois+"&annee="+annee+"");
+
+	});
+
+});
+// fin calendrier
+
+</script>
+
+</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+<?php
+}
+else
+{
+header('Location: index.php?erreur=2');
+}
+?>
